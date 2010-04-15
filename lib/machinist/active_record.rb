@@ -53,7 +53,7 @@ module Machinist
         lathe = Lathe.run(Machinist::ActiveRecordAdapter, self.new, *args)
         unless Machinist.nerfed?
           lathe.object.save!
-          lathe.object.reload
+          lathe.object.reload(:limit => 1) 
         end
         lathe.object(&block)
       end
@@ -76,7 +76,7 @@ module Machinist
       lathe = Lathe.run(Machinist::ActiveRecordAdapter, self.build, *args)
       unless Machinist.nerfed?
         lathe.object.save!
-        lathe.object.reload
+        lathe.object.reload(:limit => 1) 
       end
       lathe.object(&block)
     end
